@@ -123,13 +123,6 @@ ax8.set_title("Frequenct Response", fontsize=fontsize1)
 ax8.set_ylabel("Angle", fontsize=fontsize1)
 ax8.set_xlabel("Frequency(Hz)", fontsize=fontsize1)
 
-'''
-leg = ax.legend(loc='upper right', shadow=True, fontsize=fontsize1)
-leg2 = ax2.legend(loc='upper right', shadow=True, fontsize=fontsize1)
-leg4 = ax4.legend(loc='upper right', shadow=True, fontsize=fontsize1)
-leg5 = ax5.legend(loc='upper right', shadow=True, fontsize=fontsize1)
-leg8 = ax8.legend(loc="upper right", shadow=True, fontsize=fontsize1)
-'''
 
 plt.setp(line4,color = 'r', marker="o", markersize=12)      #設定ax4的打點方式為圓圈式
 
@@ -139,9 +132,6 @@ ax4.set_xlim(0, 200)                                        #設定 x 軸的範�
 PData.x=np.linspace(min(abs(np.fft.fftfreq(len(PData.x), d=0.01))), 2*max(abs(np.fft.fftfreq(len(PData.x), d=0.01))), len(PData.x))
 ax3.set_xlim(min(abs(np.fft.fftfreq(len(PData.x), d=0.01))), 2*max(abs(np.fft.fftfreq(len(PData.x), d=0.01))))
 ax8.set_xlim(min(abs(np.fft.fftfreq(len(PData.x), d=0.01))), 2*max(abs(np.fft.fftfreq(len(PData.x), d=0.01))))
-#print(len(PData.x))
-#ax3.set_xlim(0, 200)
-#ax8.set_xlim(0, 200)
 ax.set_ylim(0, 500)                                         #設定 y 軸的範圍限制
 ax2.set_ylim(-25, 25)
 ax3.set_ylim(0, 100)
@@ -149,26 +139,6 @@ ax4.set_ylim(0, 20)
 ax5.set_ylim(-15, 15)
 ax8.set_ylim(0, 100)
 PData.ftime=[0.0, 1.0]                                      #非常重要一定要加，不然進不去PData.f()
-
-
-'''
-line6, = ax6.plot(np.random.randn(100), label="Frequenct Response")
-line7, = ax7.plot(np.random.randn(100), label="Frequenct Response")
-ax6.set_title("Frequenct Response", fontsize=fontsize1)
-ax6.set_ylabel("Amplitude", fontsize=fontsize1)
-ax6.set_xlabel("Frequency(Hz)", fontsize=fontsize1)
-ax7.set_title("Frequenct Response", fontsize=fontsize1)
-ax7.set_ylabel("Angle(deg)", fontsize=fontsize1)
-ax7.set_xlabel("Frequency(Hz)", fontsize=fontsize1)
-#leg6 = ax6.legend(loc="upper right", shadow=True, fontsize=fontsize1)
-#leg7 = ax7.legend(loc="upper right", shadow=True, fontsize=fontsize1)
-ax6.set_xlim(320, 360)
-ax7.set_xlim(320, 360)
-ax6.set_ylim(0, 5)
-ax7.set_ylim(-180, 180)
-'''
-
-
 
 
 # plot parameters
@@ -212,9 +182,7 @@ while True:
             PData.f(data)
         except:
             pass
-    #print(time.time()-start, PData.axis_x[0])
-    
-    #PData.freqresp()
+        
     ax.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)#set_xlim->Set the x-axis view limits.->設定 X 軸的範圍限制
     ax2.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
     ax5.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
@@ -231,12 +199,6 @@ while True:
     
     line5.set_xdata(PData.axis_x)					#FIR Data
     line5.set_ydata(PData.axis_y_av_fir)
-    
-    #line6.set_xdata(PData.w)						#Frequenct Response(amplitude)
-    #line6.set_ydata(abs(PData.yfreqresp))
-    
-    #line7.set_xdata(PData.w)						#Frequenct Response(angle)
-    #line7.set_ydata(np.angle(PData.yfreqresp, deg=True))
     
     if(len(abs(np.fft.fft(PData.axis_y))) == len(PData.x)):
         line8.set_xdata(PData.x)					#All Frequency of Heart Data
