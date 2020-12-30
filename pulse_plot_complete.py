@@ -18,7 +18,7 @@ class PlotData:
         
         
         self.fre=deque(maxlen=max_entries)                  #存心跳頻率的變數
-        x=10                                                #心跳平均的程度
+        x=20                                                #心跳平均的程度
         self.amp=deque([10 for i in range(x)], maxlen=x)    #顯示在figure上表示心跳頻率的震幅(可隨意更動)
         self.fre_av=deque([0 for i in range(x)], maxlen=x)  #存心跳頻率的平均值
         self.fre_last=0                                     #存心跳頻率的平均值的最後一個element
@@ -96,7 +96,7 @@ class PlotData:
         self.w, self.yfreqresp = signal.freqz(bk, worN = self.axis_y)
     
 #initial
-fig, (ax, ax2, ax5, ax4, ax8, ax3) = plt.subplots(6, 1, figsize=[8, 10])     #定義一個視窗且有六個子圖
+fig, (ax, ax2, ax5, ax4, ax8, ax3) = plt.subplots(6, 1, figsize=[8, 9])     #定義一個視窗且有六個子圖
 #, ax6, ax7
 line,  = ax.plot(np.random.randn(100), label='Original Data')
 line2, = ax2.plot(np.random.randn(100), label="Regulization Data")
@@ -177,7 +177,7 @@ ser.flush()#wait until all data is written
 
 
 #----------------Z-domain---------------------------#
-PData.max_fir=2    #n點平均濾波器的變數(可隨意更動)
+PData.max_fir=20    #n點平均濾波器的變數(可隨意更動)
 
 angle = np.linspace(-np.pi, np.pi, 50)#可以在一定範圍內來均勻地撒點->再-pi到pi均勻的撒50個點
 cirx = np.sin(angle)
