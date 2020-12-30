@@ -18,7 +18,7 @@ class PlotData:
         
         
         self.fre=deque(maxlen=max_entries)                  #存心跳頻率的變數
-        x=20                                                #心跳平均的程度
+        x=5                                                #心跳平均的程度
         self.amp=deque([10 for i in range(x)], maxlen=x)    #顯示在figure上表示心跳頻率的震幅(可隨意更動)
         self.fre_av=deque([0 for i in range(x)], maxlen=x)  #存心跳頻率的平均值
         self.fre_last=0                                     #存心跳頻率的平均值的最後一個element
@@ -38,7 +38,7 @@ class PlotData:
         self.yfreqresp=deque(maxlen=max_entries*10)         #取frequency response的y-axis變數
         
         
-        self.x=np.linspace(0, 200, max_entries)             #顯示頻率時的x-axis
+        self.x=np.linspace(np.random.randn(200), max_entries)             #顯示頻率時的x-axis
         
         self.angle = np.linspace(-np.pi, np.pi, 100)        #可以在一定範圍內來均勻地撒點->再-pi到pi均勻的撒50個點
         self.cirx = 0
@@ -136,9 +136,12 @@ plt.setp(line4,color = 'r', marker="o", markersize=12)      #設定ax4的打點�
 
 PData= PlotData(500)                                        #實例化instanciation
 ax4.set_xlim(0, 200)                                        #設定 x 軸的範圍限制
-ax3.set_xlim(0, 200)
-ax8.set_xlim(0, 200)
-
+PData.x=np.linspace(min(abs(np.fft.fftfreq(len(PData.x), d=0.01))), 2*max(abs(np.fft.fftfreq(len(PData.x), d=0.01))), len(PData.x))
+ax3.set_xlim(min(abs(np.fft.fftfreq(len(PData.x), d=0.01))), 2*max(abs(np.fft.fftfreq(len(PData.x), d=0.01))))
+ax8.set_xlim(min(abs(np.fft.fftfreq(len(PData.x), d=0.01))), 2*max(abs(np.fft.fftfreq(len(PData.x), d=0.01))))
+#print(len(PData.x))
+#ax3.set_xlim(0, 200)
+#ax8.set_xlim(0, 200)
 ax.set_ylim(0, 500)                                         #設定 y 軸的範圍限制
 ax2.set_ylim(-25, 25)
 ax3.set_ylim(0, 100)
@@ -215,6 +218,7 @@ while True:
     ax.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)#set_xlim->Set the x-axis view limits.->設定 X 軸的範圍限制
     ax2.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
     ax5.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
+    
     
     line.set_xdata(PData.axis_x)					#Original Data
     line.set_ydata(PData.axis_y)
